@@ -40,7 +40,7 @@ contract Tradix is Ownable {
         uint256 _amountOutMin
     ) external payable onlyOwner {
         uint256 amount;
-        if (_tokenAmount == 0) {
+        if (msg.value > 0) {
             (
                 uint256 _maintainerFee,
                 uint256 _platformFee
