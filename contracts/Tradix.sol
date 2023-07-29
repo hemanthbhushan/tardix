@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
-// import "../interface/IGelatoPineCore.sol";
-
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./MockRouter/interfaces/IUniswapV2Router02.sol";
 import "../interface/IPinecore.sol";
@@ -15,6 +13,12 @@ contract Tradix is Ownable {
     address public WETH;
     address public UNISWAP_V2_ROUTER;
 
+    event EthDeposited(
+        address indexed sender,
+        uint256 amount,
+        bytes data,
+        uint256 maintainerFee
+    );
     modifier ZeroAddress(address _account) {
         require(_account != address(0), "TRDX:Invalid address");
         _;
@@ -30,6 +34,12 @@ contract Tradix is Ownable {
         UNISWAP_V2_ROUTER = _router;
     }
 
+    /**
+     * @dev Function to deposit Ether into the GelatoPineCore contract and transfer maintainer fee.
+     * @param _data Additional data to be passed to the GelatoPineCore contract .
+     * @param _maintainerFee The amount of Ether to be transferred to the maintainer as a fee for using this contract.
+     */
+
     function depositEth(
         bytes calldata _data,
         uint256 _maintainerFee
@@ -42,6 +52,8 @@ contract Tradix is Ownable {
         require(success, "TRDX: Transfer Failed");
 
         IPineCore(GelatoPineCoreAddress).depositEth{value: tValue}(_data);
+
+        emit EthDeposited(msg.sender, tValue, _data, _maintainerFee);
     }
 
     function setPlatformAddress(
