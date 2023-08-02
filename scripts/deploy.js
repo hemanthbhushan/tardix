@@ -10,14 +10,11 @@ const Hre = require("hardhat");
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-function expandTo18Decimals(n) {
-  return BigNumber.from(n).mul(BigNumber.from(10).pow(18));
-}
 
 async function main() {
   let Tradix = await Hre.ethers.getContractFactory("Tradix");
 
-  let tradix = await Tradix.deploy();
+  let tradix = await Tradix.deploy("0x00");
   await sleep(6000);
   console.log("tradix: ", await tradix.getAddress());
 

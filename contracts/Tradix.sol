@@ -2,16 +2,12 @@
 pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./MockRouter/interfaces/IUniswapV2Router02.sol";
 import "../interface/IPinecore.sol";
 
 contract Tradix is Ownable {
     //Address of the fund receiver
-    address private platformAddress;
     address private maintainerAddress;
     address public GelatoPineCoreAddress;
-    address public WETH;
-    address public UNISWAP_V2_ROUTER;
 
     event EthDeposited(
         address indexed sender,
@@ -24,14 +20,8 @@ contract Tradix is Ownable {
         _;
     }
 
-    constructor(
-        address _gelatoPineCoreAddress,
-        address _weth,
-        address _router
-    ) {
+    constructor(address _gelatoPineCoreAddress) {
         GelatoPineCoreAddress = _gelatoPineCoreAddress;
-        WETH = _weth;
-        UNISWAP_V2_ROUTER = _router;
     }
 
     /**
@@ -54,12 +44,6 @@ contract Tradix is Ownable {
         IPineCore(GelatoPineCoreAddress).depositEth{value: tValue}(_data);
 
         emit EthDeposited(msg.sender, tValue, _data, _maintainerFee);
-    }
-
-    function setPlatformAddress(
-        address _account
-    ) external onlyOwner ZeroAddress(_account) {
-        platformAddress = _account;
     }
 
     function setMaintainerAddress(
