@@ -12,9 +12,9 @@ function sleep(ms) {
 
 async function main() {
   const Tradix = await ethers.getContractFactory("Tradix");
-  const GelatoPineCoreAddress = "0x38c4092b28dAB7F3d98eE6524549571c283cdfA5";
-  const RangeOrder = "0xB8c1433cd9dF6F07f82E9a79bC8352c1d582f17E";
-  const tradix = await Tradix.deploy(GelatoPineCoreAddress, RangeOrder);
+  const GelatoPineCoreAddress = "0x0c30D3d66bc7C73A83fdA929888c34dcb24FD599";
+
+  const tradix = await Tradix.deploy(GelatoPineCoreAddress);
   await sleep(6000);
   console.log("tradix: ", await tradix.getAddress());
 

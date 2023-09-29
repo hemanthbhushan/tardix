@@ -8,7 +8,7 @@ require("dotenv").config();
 module.exports = {
   // defaultNetwork: "matic",
   networks: {
-    polygon: {
+    binance: {
       // url: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_PVT_KEY}`,
       url: `${process.env.RPC}`,
       accounts: [`0x${process.env.PVTKEY}`],
@@ -20,7 +20,7 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: process.env.API_KEY_POLYGON,
+    apiKey: process.env.API_KEY_BINANCE,
   },
   solidity: {
     compilers: [
