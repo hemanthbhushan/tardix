@@ -3,7 +3,6 @@ pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "../interface/IPinecore.sol";
-import "../interface/IRangeOrder.sol";
 
 contract Tradix is Ownable {
     //Address of the fund receiver
