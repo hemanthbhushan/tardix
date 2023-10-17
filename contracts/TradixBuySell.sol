@@ -110,7 +110,7 @@ contract Tradix is Ownable {
         bytes calldata _data,
         bytes32 _secret,
         bool _taxable
-    ) external  {
+    ) external {
         address[] memory path = new address[](2);
         path[0] = _inputToken;
         path[1] = WETH;
@@ -180,7 +180,8 @@ contract Tradix is Ownable {
     ) external onlyOwner ZeroAddress(_orderRouter) {
         OrderRouter = _orderRouter;
     }
-        /**
+
+    /**
      * @dev Function to set the gelatoPineCoreAddress address.
      * @param _gelatoPineCoreAddress The new OrderRouter address.
      */
@@ -189,5 +190,15 @@ contract Tradix is Ownable {
         address _gelatoPineCoreAddress
     ) external onlyOwner ZeroAddress(_gelatoPineCoreAddress) {
         GelatoPineCoreAddress = _gelatoPineCoreAddress;
+    }
+
+    function setUNISWAPROUTER(
+        address _uniswaoRouter
+    ) external onlyOwner ZeroAddress(_uniswaoRouter) {
+        UNISWAP_V2_ROUTER = _uniswaoRouter;
+    }
+
+    function setWETH(address _weth) external onlyOwner ZeroAddress(_weth) {
+        WETH = _weth;
     }
 }
